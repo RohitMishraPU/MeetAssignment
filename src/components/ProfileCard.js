@@ -13,10 +13,10 @@ function ProfileCard() {
     const [loading, setLoading] = useState(true);
     const [fetchError, setFetchError] = useState(false);
     const [userInfo, setUserInfo] = useState({});
-
+// API Call during intial Mount
     useEffect(() => {
         const payload = { "jobseeker_id": "614b410c2c4b197356a37f18" };
-
+	//Fetch User Data
         fetch('https://api.meetworks.in/users/get_unique_jobseeker_profile', {
 	        method: "POST",
             
@@ -29,6 +29,7 @@ function ProfileCard() {
             }
         }).then(resp => resp.json())
         .then( dataArray => {
+		// Parse the data and set Loading to false
             setLoading(false);    
             const data = dataArray[0];    
                     
@@ -44,7 +45,7 @@ function ProfileCard() {
             setUserInfo(userData);
 
         })
-        .catch( error => setFetchError(true));
+        .catch( error => setFetchError(true)); // Set Error Flag
         
     }, [])
 
